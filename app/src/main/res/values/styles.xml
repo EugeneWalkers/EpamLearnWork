@@ -8,4 +8,17 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TextHeaderStyle" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">40sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:onClick">#FFFFFF</item>
+    </style>
+
+    <style name="Card" parent="CardView">
+        <item name="cardElevation">5dp</item>
+        <item name="divider">@android:color/transparent</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="cardCornerRadius">5dp</item>
+    </style>
+
 </resources>
