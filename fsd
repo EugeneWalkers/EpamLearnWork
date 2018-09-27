@@ -1,0 +1,75 @@
+[33mcommit afeeef61184cf2e2534a2ae66459947236fdc32c[m[33m ([m[1;36mHEAD -> [m[1;32mCAP-26667-recycler-with-two-clickers[m[33m)[m
+Author: Yauheni Skarakhodau <Yauheni_Skarakhodau@epam.com>
+Date:   Mon Sep 24 14:04:11 2018 +0300
+
+    CAPDEV-26667: fix logic of adapter
+    
+            - getItemCount() returns right value
+            - remove factory
+            - activity gets items from separate class
+
+[33mcommit 6ff5b9d95b5c97619dde0da639ad55a811c5703c[m[33m ([m[1;31morigin/CAP-26667-recycler-with-two-clickers[m[33m)[m
+Author: Yauheni Skarakhodau <Yauheni_Skarakhodau@epam.com>
+Date:   Fri Sep 21 14:56:09 2018 +0300
+
+    CAPDEV-26667: change the adapter
+    
+            - change the logic of adapter - no any crutches!
+
+[33mcommit a43022299c4672458f4c47f598bfc8a4394389c2[m
+Merge: fc9e875 c685c0f
+Author: Yauheni Skarakhodau <Yauheni_Skarakhodau@epam.com>
+Date:   Fri Sep 21 13:41:29 2018 +0300
+
+    merged branch
+
+[33mcommit c685c0fc0bebbf197176acf46e9b1a73f5373144[m
+Author: EugeneWalkers <evgeniy.skorohodov@gmail.com>
+Date:   Thu Sep 20 00:57:40 2018 +0300
+
+    CAVDEP-26667: recycler view with two holders
+    
+            - change structure: cardView also contains ImageButton and
+            TextView with descriprion
+            - add second holder with repeating message
+            - add holderFabric
+            - new class for realizing text for description
+
+[33mcommit fc9e875f75170a057300d49751f2af863603b0c9[m[33m ([m[1;31morigin/dev[m[33m, [m[1;32mdev[m[33m)[m
+Author: Yauheni Skarakhodau <Yauheni_Skarakhodau@epam.com>
+Date:   Tue Sep 11 17:05:39 2018 +0300
+
+    nonCAPDEV: create first solution
+    
+            - empty activity in dev
+            - rewrite layout file
+            - add icon
+            - write an adapter for recyclerview
+            - full realized: add, delete and click
+    
+    nonCAPDEV: reformat
+    
+            - updated android studio settings
+    
+    nonCAPDEV: fix mistakes
+    
+            - add CardView as shell for TextView
+            - change name of methods in MainActivity
+            - create style for TextView
+            - rewrite clicklistener
+            - apply AS settings
+    
+    nonCAPDEV: add style
+    
+                - add style for CardView
+                - rename layout resource
+    
+    nonCAPDEV
+    
+            - remove tools
+
+[33mcommit 9a61822d8d4e88b12dce8a6aae06de882720a0d8[m
+Author: Yauheni Skarakhodau <Yauheni_Skarakhodau@epam.com>
+Date:   Tue Sep 11 17:00:07 2018 +0300
+
+    init commit; empty activity

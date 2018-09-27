@@ -2,34 +2,32 @@ package com.example.yauheni_skarakhodau.epamlearnwork;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MyRecyclerAdapter.ClickListener{
+public class MainActivity extends AppCompatActivity implements MyRecyclerAdapter.LongClickListener {
 
-    private final List<String> items = new ArrayList<>();
+    private static final String LIST_KEY = "list_key";
+
+    private final List<ItemData> items = new ArrayList<>();
     private MyRecyclerAdapter adapter;
     private AlertDialog dialogToInputData;
 
     @Override
-    public void onClick(final View view, final int pos) {
-        Toast.makeText(this, items.get(pos), Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onLongClick(final View view, final int pos) {
-        items.remove(pos);
-        adapter.notifyItemRemoved(pos);
+    public void onTextLongClick(final View view, final int pos) {
+        adapter.removeElement(pos);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -42,50 +40,40 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerAdapter
         initAndSetRecyclerView();
     }
 
+    @Override
+    protected void onSaveInstanceState(final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.i("hahaha", "hohoho");
+        outState.putParcelableArrayList(LIST_KEY, (ArrayList<? extends Parcelable>) items);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(final Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.i("hahaha", "hehehe");
+        items.clear();
+        items.addAll(savedInstanceState.<ItemData>getParcelableArrayList(LIST_KEY));
+    }
+
     private void initRecyclerViewItems() {
-        items.add("One");
-        items.add("Two");
-        items.add("Three");
-        items.add("Four");
-        items.add("Five");
-        items.add("Six");
-        items.add("Seven");
-        items.add("Eight");
-        items.add("Nine");
-        items.add("Ten");
-        items.add("Eleven");
-        items.add("Twelve");
-        items.add("Thirteen");
-        items.add("Fourteen");
-        items.add("Fifteen");
-        items.add("Sixteen");
-        items.add("Seventeen");
-        items.add("Eighteen");
-        items.add("Nineteen");
-        items.add("Twenty");
-        items.add("Twenty one");
-        items.add("Twenty two");
-        items.add("Twenty three");
-        items.add("Twenty four");
-        items.add("Twenty five");
-        items.add("Twenty six");
-        items.add("Twenty seven");
-        items.add("Twenty eight");
-        items.add("Twenty nine");
-        items.add("Thirty");
+        final List<String> listOfStringData = DataProviderClass.getItemsList();
+        for (int i = 0; i < listOfStringData.size(); i++) {
+            items.add(new ItemData(listOfStringData.get(i), i));
+        }
     }
 
     private void initAndSetRecyclerView() {
         final RecyclerView recycler = findViewById(R.id.items);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MyRecyclerAdapter(items);
-        adapter.setClicker(this);
+        adapter.setLongClicker(this);
         recycler.setAdapter(adapter);
     }
 
     private void setAddButton() {
         final FloatingActionButton button = findViewById(R.id.floatingActionButton);
         button.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(final View v) {
                 dialogToInputData.show();
@@ -99,14 +87,16 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerAdapter
         builder.setView(editText);
         builder.setTitle("Write a new item here:");
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
-                items.add(editText.getText().toString());
+                items.add(new ItemData(editText.getText().toString(), items.size()));
                 adapter.notifyDataSetChanged();
                 editText.setText("");
                 dialog.dismiss();
             }
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
                 dialog.cancel();

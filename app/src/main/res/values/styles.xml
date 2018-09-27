@@ -11,7 +11,12 @@
     <style name="TextHeaderStyle" parent="@android:style/Widget.TextView">
         <item name="android:textSize">40sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:onClick">#FFFFFF</item>
+    </style>
+
+    <style name="TextMainHeaderStyle" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">50sp</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="Card" parent="CardView">
